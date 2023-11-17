@@ -1,25 +1,24 @@
 package com.example.myTvSchedule.model.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EpisodeDto {
+public class TvShowResponseDto {
     private long id;
 
     private String name;
 
-    private int season;
+    private String imageUrl;
 
-    private int number;
+    private boolean deleted;
 
-    private LocalDate airdate;
-
-    private boolean watched;
-
+    List<EpisodeDto> episodes;
 }

@@ -1,8 +1,7 @@
 package com.example.myTvSchedule.controller;
 
 import com.example.myTvSchedule.model.Episode;
-import com.example.myTvSchedule.model.TvShow;
-import com.example.myTvSchedule.model.dto.TvShowDto;
+import com.example.myTvSchedule.model.dto.TvShowResponseDto;
 import com.example.myTvSchedule.service.EpisodeService;
 import com.example.myTvSchedule.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class ScheduleController {
     @PostMapping("/show")
     public ResponseEntity<Object> add(String id) {
         try {
-            TvShowDto tvShowDto = scheduleService.add(id);
+            TvShowResponseDto tvShowDto = scheduleService.add(id);
             return new ResponseEntity<>(tvShowDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -34,7 +33,7 @@ public class ScheduleController {
     @DeleteMapping("/show")
     public ResponseEntity<Object> delete(String id) {
         try {
-            TvShow deletedTvShow = scheduleService.softDelete(id);
+            TvShowResponseDto deletedTvShow = scheduleService.softDelete(id);
             return new ResponseEntity<>(deletedTvShow, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -43,7 +42,7 @@ public class ScheduleController {
 
     @GetMapping("/show/all")
     public ResponseEntity<Object> getAll() {
-        List<TvShow> tvShows = scheduleService.getAllTvShows();
+        List<TvShowResponseDto> tvShows = scheduleService.getAllTvShows();
         return new ResponseEntity<>(tvShows, HttpStatus.OK);
     }
 
@@ -57,11 +56,11 @@ public class ScheduleController {
         }
     }
 
-    @GetMapping("/show/{id}/first-unwatched-episode")
-    public ResponseEntity<Object> getFirstUnwatchedEpisodeFor(String showId) {
+    @GetMapping("/show/first-unwatched-episode")
+    public ResponseEntity<Object> getFirstUnwatchedEpisode() {
         try {
-            //TvShow tvShow = scheduleService.getFirstUnwatchedEpisode();
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            List<TvShowResponseDto> tvShowDtos = scheduleService.getFirstUnwatchedEpisode();
+            return new ResponseEntity<>(tvShowDtos, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }

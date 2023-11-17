@@ -1,15 +1,16 @@
 package com.example.myTvSchedule.service;
 
-import com.example.myTvSchedule.model.TvShow;
-import com.example.myTvSchedule.model.dto.TvShowDto;
+import com.example.myTvSchedule.model.dto.TvShowResponseDto;
 
 import java.util.List;
 
 public interface ScheduleService {
 
-    TvShowDto add(String showId);
+    TvShowResponseDto add(String showId);
 
-    TvShow softDelete(String id);
+    TvShowResponseDto softDelete(String id);
 
-    List<TvShow> getAllTvShows();
+    List<TvShowResponseDto> getAllTvShows();
+
+    List<TvShowResponseDto> getFirstUnwatchedEpisode();
 }

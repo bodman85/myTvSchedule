@@ -12,7 +12,7 @@ public interface EpisodeMapper {
     EpisodeMapper INSTANCE = Mappers.getMapper(EpisodeMapper.class);
 
     @Mapping(target = "watched", constant = "false")
-    @Mapping(target = "tvShow", ignore = true)
+    @Mapping(target = "tvShow", ignore=true)
     Episode toEntity(EpisodeDto dto);
 
 }

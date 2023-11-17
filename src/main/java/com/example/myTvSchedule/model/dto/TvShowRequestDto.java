@@ -6,14 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TvShowDto {
+public class TvShowRequestDto {
     private long id;
 
     private String name;
 
     private ImageDto image;
-
-    EpisodeDto[] episodes;
 }
