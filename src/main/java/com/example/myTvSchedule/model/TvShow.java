@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -28,5 +29,6 @@ public class TvShow {
 
     @OneToMany(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="tv_show_id")
+    @ToString.Exclude
     private List<Episode> episodes;
 }

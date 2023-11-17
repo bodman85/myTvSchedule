@@ -1,6 +1,7 @@
 package com.example.myTvSchedule.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -34,5 +35,6 @@ public class Episode {
 
     @ManyToOne
     @JoinColumn(name="tv_show_id", insertable=false, updatable=false)
+    @JsonIgnore
     private TvShow tvShow;
 }

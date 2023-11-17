@@ -51,8 +51,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .collect(Collectors.toList());
 
         tvShow.setEpisodes(episodes);
-        tvShowRepository.save(tvShow);
-        return tvShow;
+        return tvShowRepository.save(tvShow);
     }
 
     @Override
@@ -61,8 +60,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         TvShow tvShow = tvShowRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new EntityNotFoundException("Cannot find tv-show by id: " + id));
         tvShow.setDeleted(true);
-        tvShowRepository.save(tvShow);
-        return tvShow;
+        return tvShowRepository.save(tvShow);
     }
 
     @Override
