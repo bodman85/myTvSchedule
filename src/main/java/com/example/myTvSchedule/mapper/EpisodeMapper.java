@@ -12,8 +12,7 @@ import java.util.List;
 public interface EpisodeMapper {
     EpisodeMapper INSTANCE = Mappers.getMapper(EpisodeMapper.class);
 
-    @Mapping(target = "tvShow.id", source = "tvShowId")
+    @Mapping(target = "watched", constant = "false")
     Episode toEntity(EpisodeDto dto);
 
-    List<Episode> toEntities(List<EpisodeDto> dtos);
 }

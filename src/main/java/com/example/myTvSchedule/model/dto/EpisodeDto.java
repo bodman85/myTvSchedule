@@ -10,9 +10,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EpisodeDto {
-    private Long id;
+    private long id;
 
-    private Long tvShowId;
+    private long tvShowId;
 
     private String name;
 
@@ -21,7 +21,5 @@ public class EpisodeDto {
     private int number;
 
     private LocalDate airdate;
-
-    private Boolean watched;
 
 }

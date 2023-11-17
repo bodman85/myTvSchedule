@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.time.LocalDate;
 
@@ -17,7 +16,7 @@ import java.time.LocalDate;
 @Table(name="EPISODES", schema = "PUBLIC")
 public class Episode {
     @Id
-    private Long id;
+    private long id;
 
     @NotNull
     private String name;
@@ -31,10 +30,9 @@ public class Episode {
     @NotNull
     private LocalDate airdate;
 
-    private Boolean watched;
+    private boolean watched;
 
-    @ManyToOne(fetch= FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name="tv_show_id", referencedColumnName="id")
-    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name="tv_show_id", insertable=false, updatable=false)
     private TvShow tvShow;
 }

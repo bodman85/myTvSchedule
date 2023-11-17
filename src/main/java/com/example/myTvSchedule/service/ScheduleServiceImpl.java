@@ -7,7 +7,6 @@ import com.example.myTvSchedule.model.Episode;
 import com.example.myTvSchedule.model.TvShow;
 import com.example.myTvSchedule.model.dto.EpisodeDto;
 import com.example.myTvSchedule.model.dto.TvShowDto;
-import com.example.myTvSchedule.repository.EpisodeRepository;
 import com.example.myTvSchedule.repository.TvShowRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +26,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     private WebClient webClient;
 
     private final TvShowRepository tvShowRepository;
-
-    private final EpisodeRepository episodeRepository;
 
     @Override
     @Transactional
@@ -50,14 +47,10 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .block();
 
         List<Episode> episodes = Arrays.stream(episodeDtos)
-                .map(dto -> {
-                    dto.setWatched(false);
-                    return dto;
-                })
                 .map(EpisodeMapper.INSTANCE::toEntity)
                 .collect(Collectors.toList());
-        tvShow.setEpisodes(episodes);
 
+        tvShow.setEpisodes(episodes);
         tvShowRepository.save(tvShow);
         return tvShow;
     }

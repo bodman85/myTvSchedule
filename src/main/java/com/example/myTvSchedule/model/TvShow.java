@@ -15,8 +15,7 @@ import java.util.List;
 @Table(name = "TV_SHOWS", schema = "PUBLIC")
 public class TvShow {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;
+    private long id;
 
     @NotNull
     private String name;
@@ -25,8 +24,9 @@ public class TvShow {
     private String imageUrl;
 
     @NotNull
-    private Boolean deleted;
+    private boolean deleted;
 
-    @OneToMany(mappedBy = "tvShow", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="tv_show_id")
     private List<Episode> episodes;
 }
