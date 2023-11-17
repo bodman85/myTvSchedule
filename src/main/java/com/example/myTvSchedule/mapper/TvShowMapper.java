@@ -14,6 +14,7 @@ public interface TvShowMapper {
 
     @Mapping(target = "imageUrl", source = "image.original")
     @Mapping(target = "episodes", ignore = true)
+    @Mapping(target = "castList", ignore = true)
     @Mapping(target = "deleted",ignore = true)
     TvShow toEntity(TvShowRequestDto dto);
 

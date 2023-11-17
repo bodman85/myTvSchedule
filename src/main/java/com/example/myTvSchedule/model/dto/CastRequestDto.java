@@ -7,10 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TvShowRequestDto {
-    private long id;
-
-    private String name;
-
-    private ImageDto image;
+public class CastRequestDto {
+    PersonDto person;
 }

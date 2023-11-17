@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor
@@ -30,5 +30,11 @@ public class TvShow {
     @OneToMany(fetch= FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="tv_show_id")
     @ToString.Exclude
-    private List<Episode> episodes;
+    private Collection<Episode> episodes;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "TV_SHOW_CAST",
+            joinColumns = {@JoinColumn(name = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "tv_show_id")})
+    private Collection<Cast> castList;
 }

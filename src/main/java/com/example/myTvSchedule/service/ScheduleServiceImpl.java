@@ -1,9 +1,12 @@
 package com.example.myTvSchedule.service;
 
 import com.example.myTvSchedule.exception.EntityNotFoundException;
+import com.example.myTvSchedule.mapper.CastMapper;
 import com.example.myTvSchedule.mapper.EpisodeMapper;
 import com.example.myTvSchedule.mapper.TvShowMapper;
+import com.example.myTvSchedule.model.Cast;
 import com.example.myTvSchedule.model.Episode;
+import com.example.myTvSchedule.model.dto.CastRequestDto;
 import com.example.myTvSchedule.model.dto.EpisodeDto;
 import com.example.myTvSchedule.model.dto.TvShowRequestDto;
 import com.example.myTvSchedule.model.dto.TvShowResponseDto;
@@ -17,6 +20,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +28,7 @@ import java.util.stream.Collectors;
 public class ScheduleServiceImpl implements ScheduleService {
 
     @Autowired
-    private WebClient webClient;
+    private final WebClient webClient;
 
     private final TvShowRepository tvShowRepository;
 
@@ -45,14 +49,25 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .bodyToMono(EpisodeDto[].class)
                 .block();
 
-        var tvShow = TvShowMapper.INSTANCE.toEntity(tvShowRequestDto);
-        List<Episode> episodes = Arrays.stream(episodeDtos)
+        CastRequestDto[] castRequestDtos = webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder.path("/shows/{id}/cast").build(id))
+                .retrieve()
+                .bodyToMono(CastRequestDto[].class)
+                .block();
+
+        Set<Episode> episodes = Arrays.stream(episodeDtos)
                 .map(EpisodeMapper.INSTANCE::toEntity)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
 
+        Set<Cast> castList = Arrays.stream(castRequestDtos)
+                .map(CastMapper.INSTANCE::toEntity)
+                .collect(Collectors.toSet());
+
+        var tvShow = TvShowMapper.INSTANCE.toEntity(tvShowRequestDto);
         tvShow.setEpisodes(episodes);
+        tvShow.setCastList(castList);
         tvShowRepository.save(tvShow);
-
         return TvShowMapper.INSTANCE.toResponseDto(tvShow);
     }
 
