@@ -6,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShowDto {
+public class TvShowDto {
     private long id;
     private String name;
     private ImageDto image;
