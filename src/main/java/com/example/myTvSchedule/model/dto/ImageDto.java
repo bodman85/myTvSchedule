@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShowDto {
-    private long id;
-    private String name;
-    private ImageDto image;
+public class ImageDto {
+    private String medium;
+    private String original;
 }

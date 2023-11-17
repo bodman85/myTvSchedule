@@ -1,6 +1,6 @@
 package com.example.myTvSchedule.controller;
 
-import com.example.myTvSchedule.model.dto.ShowDto;
+import com.example.myTvSchedule.model.Show;
 import com.example.myTvSchedule.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class ScheduleController {
 
     @PostMapping("/show")
     public ResponseEntity<Object> add(String showId) {
-        ShowDto dto = scheduleService.add(showId);
-        return new ResponseEntity<>(dto, HttpStatus.CREATED);
+        Show show = scheduleService.add(showId);
+        return new ResponseEntity<>(show, HttpStatus.CREATED);
     }
 }

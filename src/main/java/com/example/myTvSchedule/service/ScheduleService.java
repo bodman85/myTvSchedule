@@ -1,8 +1,8 @@
 package com.example.myTvSchedule.service;
 
-import com.example.myTvSchedule.model.dto.ShowDto;
+import com.example.myTvSchedule.model.Show;
 
 public interface ScheduleService {
 
-    ShowDto add(String showId);
+    Show add(String showId);
 }

@@ -16,13 +16,13 @@ public class ScheduleServiceImpl implements ScheduleService {
     WebClient webClient;
 
     @Override
-    public ShowDto add(String id) {
-        Show show = webClient
+    public Show add(String id) {
+        ShowDto dto = webClient
                 .get()
                 .uri(uriBuilder -> uriBuilder.path("/shows/{id}").build(id))
                 .retrieve()
-                .bodyToMono(Show.class)
+                .bodyToMono(ShowDto.class)
                 .block();
-        return ShowMapper.INSTANCE.toDto(show);
+        return ShowMapper.INSTANCE.toEntity(dto);
     }
 }
