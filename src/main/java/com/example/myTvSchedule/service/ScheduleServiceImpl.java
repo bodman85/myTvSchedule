@@ -29,7 +29,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     @Transactional
-    public TvShow add(String id) {
+    public TvShowDto add(String id) {
         TvShowDto tvShowDto = webClient
                 .get()
                 .uri(uriBuilder -> uriBuilder.path("/shows/{id}").build(id))
@@ -45,13 +45,15 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .retrieve()
                 .bodyToMono(EpisodeDto[].class)
                 .block();
+        tvShowDto.setEpisodes(episodeDtos);
 
         List<Episode> episodes = Arrays.stream(episodeDtos)
                 .map(EpisodeMapper.INSTANCE::toEntity)
                 .collect(Collectors.toList());
 
         tvShow.setEpisodes(episodes);
-        return tvShowRepository.save(tvShow);
+        tvShowRepository.save(tvShow);
+        return tvShowDto;
     }
 
     @Override

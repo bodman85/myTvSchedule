@@ -2,6 +2,7 @@ package com.example.myTvSchedule.controller;
 
 import com.example.myTvSchedule.model.Episode;
 import com.example.myTvSchedule.model.TvShow;
+import com.example.myTvSchedule.model.dto.TvShowDto;
 import com.example.myTvSchedule.service.EpisodeService;
 import com.example.myTvSchedule.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,8 @@ public class ScheduleController {
     @PostMapping("/show")
     public ResponseEntity<Object> add(String id) {
         try {
-            TvShow tvShow = scheduleService.add(id);
-            return new ResponseEntity<>(tvShow, HttpStatus.CREATED);
+            TvShowDto tvShowDto = scheduleService.add(id);
+            return new ResponseEntity<>(tvShowDto, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
@@ -51,6 +52,16 @@ public class ScheduleController {
         try {
             Episode episode = episodeService.markWatched(id);
             return new ResponseEntity<>(episode, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/show/{id}/first-unwatched-episode")
+    public ResponseEntity<Object> getFirstUnwatchedEpisodeFor(String showId) {
+        try {
+            //TvShow tvShow = scheduleService.getFirstUnwatchedEpisode();
+            return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }

@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TvShowDto {
     private long id;
+
     private String name;
+
     private ImageDto image;
+
+    EpisodeDto[] episodes;
 }
