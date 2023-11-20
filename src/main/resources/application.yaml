@@ -21,3 +21,10 @@ spring:
       enabled: true
       path: /h2-console
       settings.trace: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
